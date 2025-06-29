@@ -14,7 +14,7 @@ namespace FinancialApp.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetAll()
         {
             var stocks = _context.Stocks.ToList();
