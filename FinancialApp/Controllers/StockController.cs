@@ -23,7 +23,7 @@ namespace FinancialApp.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(Guid id)
         {
             var stock = _context.Stocks.Find(id);
 
