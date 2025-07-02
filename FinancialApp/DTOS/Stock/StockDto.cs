@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using FinancialApp.DTOS.Comment;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinancialApp.DTOS.Stock
 {
@@ -11,5 +12,6 @@ namespace FinancialApp.DTOS.Stock
         public decimal LastDiv { get; set; }
         public string Industry { get; set; } = string.Empty;
         public long MarketCap { get; set; }
+        public List<CommentDto> Comments { get; set; }
     }
 }

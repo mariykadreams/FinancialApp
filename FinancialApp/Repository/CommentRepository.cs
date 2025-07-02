@@ -28,10 +28,11 @@ namespace FinancialApp.Repository
             return await _context.Comments.ToListAsync();
         }
 
-        public Task<Comment?> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Comment?> GetByIdAsync(Guid id)
+{
+    return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+}
+
 
         public Task<Comment?> UpdateAsync(Guid id, Comment commentModel)
         {

@@ -1,6 +1,7 @@
 ﻿using FinancialApp.Data;
 using FinancialApp.Interfaces;
 using FinancialApp.Mappers;
+using FinancialApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,19 @@ namespace FinancialApp.Controllers
             var commentDto = comments.Select(s => s.ToCommentDto());
 
             return Ok(commentDto);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var comment = await _commentRepo.GetByIdAsync(id);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(comment.ToCommentDto());
         }
 
     }

@@ -38,7 +38,7 @@ namespace FinancialApp.Repository
 
         public async Task<List<Stock>> GetAllAsyc()
         {
-            return await _context.Stocks.ToListAsync();
+            return await _context.Stocks.Include(c => c.Comments).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(Guid id)
