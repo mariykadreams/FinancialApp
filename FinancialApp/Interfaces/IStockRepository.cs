@@ -11,7 +11,7 @@ namespace FinancialApp.Interfaces
         Task<Stock> CreateAsync(Stock stockModel);
         Task<Stock?> UpdateAsync(Guid id, UpdateStockRequestDto stockDto);
         Task<Stock?> DeleteAsync(Guid id);
-        // Task<bool> StockExists(Guid id);
+        Task<bool> StockExists(Guid id);
 
     }
 }

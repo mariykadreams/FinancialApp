@@ -1,4 +1,5 @@
 ﻿using FinancialApp.Data;
+using FinancialApp.DTOS.Comment;
 using FinancialApp.Interfaces;
 using FinancialApp.Mappers;
 using FinancialApp.Models;
@@ -11,12 +12,12 @@ namespace FinancialApp.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly ICommentRepository _commentRepo;
-        public CommentController(ApplicationDbContext context, ICommentRepository commentRepo)
+        private readonly IStockRepository _stockRepo;
+        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo)
         {
-            _context = context;
             _commentRepo = commentRepo;
+            _stockRepo = stockRepo;
         }
 
         [HttpGet]
@@ -42,5 +43,17 @@ namespace FinancialApp.Controllers
             return Ok(comment.ToCommentDto());
         }
 
+        [HttpPost("{stockId}")]
+        public async Task<IActionResult> Create([FromRoute] Guid stockId, CreateCommentDto commentDto)
+        {
+            if(!await _stockRepo.StockExists(stockId))
+            {
+                return BadRequest("Stock does not exist");
+            }
+
+            var commentModel = commentDto.ToCommentFromCreate(stockId);
+            await _commentRepo.CreateAsync(commentModel);
+            return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
+        }
     }
 }

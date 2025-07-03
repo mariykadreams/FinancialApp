@@ -51,6 +51,11 @@ namespace FinancialApp.Repository
             return await _context.Stocks.FirstOrDefaultAsync(s => s.Symbol == symbol);
         }
 
+        public Task<bool> StockExists(Guid id)
+        {
+            return _context.Stocks.AnyAsync(x => x.Id == id);
+        }
+
         public async Task<Stock?> UpdateAsync(Guid id, UpdateStockRequestDto stockDto)
         {
             var existingStock = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);

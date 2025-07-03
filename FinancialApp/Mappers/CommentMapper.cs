@@ -17,5 +17,15 @@ namespace FinancialApp.Mappers
             };
         }
 
+        public static Comment ToCommentFromCreate(this CreateCommentDto commentModel, Guid stockId)
+        {
+            return new Comment
+            {
+                Title = commentModel.Title,
+                Content = commentModel.Content,
+                StockId = stockId
+            };
+        }
+
     }
 }
