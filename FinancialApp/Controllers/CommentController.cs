@@ -23,16 +23,25 @@ namespace FinancialApp.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var comments =  await _commentRepo.GetAllAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var comments =  await _commentRepo.GetAllAsync();
             var commentDto = comments.Select(s => s.ToCommentDto());
 
             return Ok(commentDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var comment = await _commentRepo.GetByIdAsync(id);
 
             if (comment == null)
@@ -43,10 +52,15 @@ namespace FinancialApp.Controllers
             return Ok(comment.ToCommentDto());
         }
 
-        [HttpPost("{stockId}")]
+        [HttpPost("{stockId:Guid}")]
         public async Task<IActionResult> Create([FromRoute] Guid stockId, CreateCommentDto commentDto)
         {
-            if(!await _stockRepo.StockExists(stockId))
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!await _stockRepo.StockExists(stockId))
             {
                 return BadRequest("Stock does not exist");
             }
@@ -57,9 +71,14 @@ namespace FinancialApp.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCommentRequestDto updateDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var comment = await _commentRepo.UpdateAsync(id, updateDto.ToCommentFromUpdate());
 
             if (comment == null)
@@ -71,7 +90,7 @@ namespace FinancialApp.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:Guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
