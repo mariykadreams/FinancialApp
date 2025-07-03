@@ -1,5 +1,6 @@
 ﻿using FinancialApp.Data;
 using FinancialApp.DTOS.Stock;
+using FinancialApp.Helpers;
 using FinancialApp.Interfaces;
 using FinancialApp.Mappers;
 using Microsoft.AspNetCore.Http;
@@ -21,14 +22,15 @@ namespace FinancialApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var stocks = await _stockRepo.GetAllAsyc();
+            var stocks = await _stockRepo.GetAllAsyc(query);
+
             var stockDto = stocks.Select(s => s.ToStockDto()).ToList();
 
             return Ok(stocks);
