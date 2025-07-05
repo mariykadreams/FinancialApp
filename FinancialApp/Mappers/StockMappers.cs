@@ -20,6 +20,7 @@ namespace FinancialApp.Mappers
                 Comments = stockModel.Comments.Select(c => c.ToCommentDto()).ToList()
             };
         }
+
         public static Stock ToStockFromCreateDto(this CreateStockRequestDto stockDto)
         {
             return new Stock
