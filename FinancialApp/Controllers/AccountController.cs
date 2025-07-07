@@ -7,5 +7,6 @@ namespace FinancialApp.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+
     }
 }
