@@ -1,4 +1,5 @@
 ﻿using FinancialApp.DTOS.Account;
+using FinancialApp.Interfaces;
 using FinancialApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -6,14 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialApp.Controllers
 {
-    [Route("api/[account]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-    
-        public AccountController(UserManager<AppUser> userManager)
+        private readonly ITokenService _tokenService;
+
+        public AccountController(ITokenService tokenService,  UserManager<AppUser> userManager)
         {
+            _tokenService = tokenService;
             _userManager = userManager;
             
         }
@@ -39,7 +42,14 @@ namespace FinancialApp.Controllers
                     var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
                     if (roleResult.Succeeded)
                     {
-                        return Ok("User created");
+                        return Ok(
+                            new NewUserDto
+                            {
+                                UserName = appUser.UserName,
+                                Email = appUser.Email,
+                                Token = _tokenService.CreateToken(appUser)
+                            }
+                        );
                     }
                     else
                     {
