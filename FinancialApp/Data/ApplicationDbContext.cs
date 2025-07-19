@@ -37,4 +37,4 @@ namespace FinancialApp.Data
         }
     }
 }
-}
+
