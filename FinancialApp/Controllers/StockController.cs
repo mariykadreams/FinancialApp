@@ -3,6 +3,7 @@ using FinancialApp.DTOS.Stock;
 using FinancialApp.Helpers;
 using FinancialApp.Interfaces;
 using FinancialApp.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,9 @@ namespace FinancialApp.Controllers
             _stockRepo = stockRepo;
         }
 
+
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
