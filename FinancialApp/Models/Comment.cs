@@ -1,5 +1,8 @@
-﻿namespace FinancialApp.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FinancialApp.Models
 {
+    [Table("Comments")]
     public class Comment
     {
         public Guid Id { get; set; }

@@ -3,6 +3,7 @@ using System.Xml.Linq;
 
 namespace FinancialApp.Models
 {
+    [Table("Stocks")]
     public class Stock
     {
         public Guid Id { get; set; }
@@ -16,5 +17,6 @@ namespace FinancialApp.Models
         public long MarketCap { get; set; }
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
     }
 }
