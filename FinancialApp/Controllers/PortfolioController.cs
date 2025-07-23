@@ -38,7 +38,7 @@ namespace FinancialApp.Controllers
 
         [HttpPost]
         [Authorize]
-       /* public async Task<IActionResult> AddPortfolio(string symbol)
+        public async Task<IActionResult> AddPortfolio(string symbol)
         {
             var username = User.GetUsername();
             var appUser = await _userManager.FindByNameAsync(username);
@@ -46,15 +46,17 @@ namespace FinancialApp.Controllers
 
             if (stock == null)
             {
-                stock = await _fmpService.FindStockBySymbolAsync(symbol);
-                if (stock == null)
-                {
-                    return BadRequest("Stock does not exists");
-                }
-                else
-                {
-                    await _stockRepo.CreateAsync(stock);
-                }
+                return BadRequest("Stock does not exists");
+
+                //stock = await _fmpService.FindStockBySymbolAsync(symbol);
+                //if (stock == null)
+                //{
+                //    return BadRequest("Stock does not exists");
+                //}
+                //else
+                //{
+                //    await _stockRepo.CreateAsync(stock);
+                //}
             }
 
             if (stock == null) return BadRequest("Stock not found");
@@ -79,7 +81,7 @@ namespace FinancialApp.Controllers
             {
                 return Created();
             }
-        }*/
+        }
 
         [HttpDelete]
         [Authorize]
