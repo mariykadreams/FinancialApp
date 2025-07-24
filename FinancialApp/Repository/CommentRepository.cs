@@ -36,13 +36,13 @@ namespace FinancialApp.Repository
 
         public async Task<List<Comment>> GetAllAsync()
         {
-            return await _context.Comments.ToListAsync();
+            return await _context.Comments.Include(a => a.AppUser).ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(Guid id)
-{
-    return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
-}
+        {
+            return await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.Id == id);
+        }
 
 
         public async Task<Comment?> UpdateAsync(Guid id, Comment commentModel)

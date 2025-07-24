@@ -13,6 +13,7 @@ namespace FinancialApp.Mappers
                 Title = commentModel.Title,
                 Content = commentModel.Content,
                 CreatedOn = commentModel.CreatedOn,
+                CreateBy = commentModel.AppUser.UserName,
                 StockId = commentModel.StockId
             };
         }
