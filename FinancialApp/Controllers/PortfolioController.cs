@@ -15,16 +15,17 @@ namespace FinancialApp.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IStockRepository _stockRepo;
         private readonly IPortfolioRepository _portfolioRepo;
-        
+        private readonly IFMPService _fmpService;
         public PortfolioController(UserManager<AppUser> userManager,
-        IStockRepository stockRepo, IPortfolioRepository portfolioRepo
-        )
+        IStockRepository stockRepo, IPortfolioRepository portfolioRepo,
+        IFMPService fmpService)
         {
             _userManager = userManager;
             _stockRepo = stockRepo;
             _portfolioRepo = portfolioRepo;
-           
+            _fmpService = fmpService;
         }
+
 
         [HttpGet]
         [Authorize]
@@ -46,17 +47,17 @@ namespace FinancialApp.Controllers
 
             if (stock == null)
             {
-                return BadRequest("Stock does not exists");
+                
 
-                //stock = await _fmpService.FindStockBySymbolAsync(symbol);
-                //if (stock == null)
-                //{
-                //    return BadRequest("Stock does not exists");
-                //}
-                //else
-                //{
-                //    await _stockRepo.CreateAsync(stock);
-                //}
+                stock = await _fmpService.FindStockBySymbolAsync(symbol);
+                if (stock == null)
+                {
+                    return BadRequest("Stock does not exists");
+                }
+                else
+                {
+                    await _stockRepo.CreateAsync(stock);
+                }
             }
 
             if (stock == null) return BadRequest("Stock not found");
