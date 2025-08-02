@@ -10,12 +10,17 @@ function App() {
   const[searchResult, setSearchResult] = useState<CompanySearch[]>([])
   const[serverError, setServevrError] = useState<string>("");
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement> ) =>{
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement> ) =>{
         setSearch(e.target.value);
-        console.log(e);
     };
 
-    const onClick = async (e: SyntheticEvent) =>{
+    const onPortfolioCreate = (e: SyntheticEvent) =>{
+      e.preventDefault();
+      console.log(e);
+    }
+
+    const onSearchSubmit = async (e: SyntheticEvent) =>{
+      e.preventDefault();
         const result = await searchCompanies(search);
         if (typeof result === "string") {
           setServevrError(result);
@@ -28,9 +33,9 @@ function App() {
 
   return (
     <div className='App'>
-      <Search onClick={onClick} search={search} handleChange={handleChange}/>
+      <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange}/>
       
-      <CardList searchResults={searchResult}/>
+      <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate}/>
 
       {serverError && <h1>Unable to connect to API{serverError}</h1>}
     </div>
