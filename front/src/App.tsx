@@ -1,10 +1,11 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import './App.css'
 import CardList from './Components/CardList/CardList'
 import Search from './Components/Search/Search'
 import { CompanySearch } from './company';
 import { searchCompanies } from './api';
 import ListPortfolio from './Components/Portfolio/ListPortfolio/ListPortfolio';
+import Navbar from './Components/Navbar/Navbar';
+import Hero from './Components/Hero/hero';
 
 function App() {
   const [search, setSearch] = useState<string>("");
@@ -47,6 +48,8 @@ function App() {
 
   return (
     <div className='App'>
+      <Navbar />
+      <Hero />
       <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange}/>
       <ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
       <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate}/>

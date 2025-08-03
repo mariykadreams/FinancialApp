@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Rubik&display=swap");
+
+@import "tailwindcss";
+
+/* --- Define your custom theme properties using @theme --- */
+@theme {
+  /* Define your custom colors here */
+  --color-light-blue: hsl(215.02, 98.39%, 51.18%);
+  --color-dark-blue: hsl(213.86, 58.82%, 46.67%);
+  --color-light-green: hsl(156.62, 73.33%, 58.82%); /* Your lightGreen */
+
+  /* You can also define your font families here for global use by Tailwind */
+  --font-family-sans: Poppins, sans-serif;
+
+  /* For spacing, if you had custom spacing like '180: "32rem"', you can define it
+     as a variable and potentially use @utility for a custom spacing class,
+     or use arbitrary values: `w-[32rem]`.
+     For now, focus on colors. */
+}
+
+/* --- You might still need to explicitly create the utility if @theme doesn't auto-generate it for a specific class like bg-lightGreen, though it often does --- */
+/* This rule might be redundant if @theme handles it, but good for explicit safety */
+.bg-lightGreen {
+  background-color: var(--color-light-green); /* Referencing the variable defined in @theme */
+}
+
+.bg-darkBlue {
+  background-color: var(--color-dark-blue); /* Referencing the variable defined in @theme */
+}
+
+/* Any other *your project's* custom CSS can go here */
