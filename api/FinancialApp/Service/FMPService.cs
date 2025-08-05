@@ -1,4 +1,4 @@
-﻿using FinancialApp.DTOS.Stock;
+using FinancialApp.DTOS.Stock;
 using FinancialApp.Interfaces;
 using FinancialApp.Mappers;
 using FinancialApp.Models;
@@ -19,24 +19,36 @@ namespace FinancialApp.Service
         {
             try
             {
-                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey={_config["FMPKey"]}");
+                var apiKey = _config["FMPKey"];
+                // It's good practice to log or check if the API key is loaded
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    Console.WriteLine("FMP API Key is missing from configuration.");
+                    return null;
+                }
+
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey={apiKey}");
+
                 if (result.IsSuccessStatusCode)
                 {
                     var content = await result.Content.ReadAsStringAsync();
                     var tasks = JsonConvert.DeserializeObject<FMPStock[]>(content);
-                    var stock = tasks[0];
-                    if (stock != null)
+
+                    // CORRECTED: Check if the array contains any elements before accessing index 0
+                    if (tasks != null && tasks.Length > 0)
                     {
+                        var stock = tasks[0];
                         return stock.ToStockFromFMP();
                     }
-                    return null;
                 }
+
+                // If the status code is not successful or the array is empty, return null
                 return null;
             }
-
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                // This catch block will handle other exceptions, but the primary issue is now fixed.
+                Console.WriteLine($"An error occurred in FMPService: {e}");
                 return null;
             }
         }
