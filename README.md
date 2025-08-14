@@ -1,12 +1,12 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## 📈 FinShark – Full-Stack Finance Portfolio Tracker
 
 <img width="1916" height="861" alt="image" src="https://github.com/user-attachments/assets/afdd83ff-8310-4c4a-9cb0-84956c0d684a" />
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
-
+A full-stack finance web application built with React + TypeScript on the frontend and .NET on the backend.
+FinShark lets users search for stocks, add them to a personal portfolio, and view detailed company financials including Income Statements, Balance Sheets, and Cash Flow Statements.
 
 
 
@@ -19,6 +19,12 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 * ![JWT](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)
 
 
+### 🚀 Features
+
+* Stock Search – Look up companies by ticker or name
+* Portfolio Management – Add, remove, and view your tracked stocks
+* Financial Reports – Access key statements directly from your portfolio
+* Responsive UI – Built with modern React + TypeScript best practices
 
 <!-- GETTING STARTED -->
 ## Getting Started
