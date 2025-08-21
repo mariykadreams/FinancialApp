@@ -10,5 +10,6 @@ namespace FinancialApp.Interfaces
         Task<Comment> CreateAsync(Comment commentModel);
         Task<Comment?> UpdateAsync(Guid id, Comment commentModel);
         Task<Comment?> DeleteAsync(Guid id);
+        
     }
 }
