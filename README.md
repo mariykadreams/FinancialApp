@@ -1,7 +1,7 @@
-
+ 
 
 <!-- ABOUT THE PROJECT -->
-## 📈 FinShark – Full-Stack Finance Portfolio Tracker ૮ ˶ᵔ ᵕ ᵔ˶ ა
+## 📈 FinShark – Full-Stack Finance Portfolio Tracker ૮ ˶ᵔ ᵕ ᵔ˶ ა 
 
 <img width="1916" height="861" alt="image" src="https://github.com/user-attachments/assets/afdd83ff-8310-4c4a-9cb0-84956c0d684a" />
 
